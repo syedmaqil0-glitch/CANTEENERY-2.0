@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Canteenery Kitchen Command Center</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#5c2400",
+            "secondary-fixed": "#ffdbca",
+            "primary-container": "#002147",
+            "on-tertiary": "#ffffff",
+            "primary-fixed-dim": "#aec7f6",
+            "on-surface-variant": "#44474e",
+            "outline-variant": "#c4c6cf",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed": "#341100",
+            "on-secondary-fixed": "#341100",
+            "outline": "#74777f",
+            "on-secondary-fixed-variant": "#783200",
+            "on-surface": "#0d1c2d",
+            "surface-bright": "#f8f9ff",
+            "surface-variant": "#d4e4fa",
+            "secondary-container": "#fd761a",
+            "secondary-fixed-dim": "#ffb690",
+            "on-primary-fixed-variant": "#2d476f",
+            "tertiary-fixed": "#ffdbcb",
+            "primary": "#000a1e",
+            "surface-tint": "#465f88",
+            "tertiary": "#180500",
+            "surface": "#f8f9ff",
+            "secondary": "#9d4300",
+            "surface-container": "#e5efff",
+            "inverse-primary": "#aec7f6",
+            "on-primary-fixed": "#001b3d",
+            "surface-container-high": "#dbe9ff",
+            "on-secondary": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-tertiary-container": "#b97958",
+            "error": "#ba1a1a",
+            "surface-container-low": "#eef4ff",
+            "on-error-container": "#93000a",
+            "background": "#f8f9ff",
+            "inverse-on-surface": "#e9f1ff",
+            "on-primary-container": "#708ab5",
+            "tertiary-fixed-dim": "#ffb691",
+            "on-background": "#0d1c2d",
+            "tertiary-container": "#3d1500",
+            "primary-fixed": "#d6e3ff",
+            "inverse-surface": "#233143",
+            "surface-container-highest": "#d4e4fa",
+            "on-tertiary-fixed-variant": "#6c391d",
+            "on-primary": "#ffffff",
+            "surface-dim": "#ccdbf2"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "24px",
+            "2xl": "48px",
+            "sm": "8px",
+            "xl": "32px",
+            "xs": "4px",
+            "base": "8px",
+            "lg": "24px",
+            "container-max": "1280px",
+            "md": "16px"
+          },
+          "fontFamily": {
+            "display-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-sm": ["Inter"]
+          },
+          "fontSize": {
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .gauge-ring {
+      stroke-dasharray: 282.74;
+      stroke-dashoffset: 62;
+      transition: stroke-dashoffset 0.8s ease-in-out, stroke 0.5s ease;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background flex h-screen overflow-hidden font-body-md">
+
+  <!-- SideNavBar (Approved Stitch Component) -->
+  <nav id="kitchen-sidebar" class="hidden md:flex fixed left-0 top-0 h-full w-[280px] bg-primary dark:bg-primary shadow-lg flex-col py-xl z-50 border-r border-outline-variant/20">
+    <!-- Brand / Header -->
+    <div class="px-lg mb-xl">
+      <div class="flex items-center gap-2 mb-xs">
+        <span class="material-symbols-outlined text-secondary-container text-2xl" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+        <h1 class="text-headline-sm font-headline-sm font-black text-on-primary">Canteenery</h1>
+      </div>
+      <p class="text-body-sm font-body-sm text-secondary-fixed opacity-70">Kitchen Command Center</p>
+      <div class="mt-sm pt-sm border-t border-outline-variant/20 flex items-center gap-sm">
+        <div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-primary font-bold text-xs">
+          K1
+        </div>
+        <div>
+          <p class="text-label-sm font-semibold text-on-primary">Kitchen Staff</p>
+          <p class="text-[11px] text-primary-fixed-dim">Main Kitchen - Block A</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="flex flex-col gap-sm flex-1">
+      <li>
+        <a class="flex items-center gap-md bg-transparent text-secondary-fixed border-l-4 border-secondary-container px-lg py-md scale-95 transition-transform text-label-md font-label-md cursor-pointer" data-tab="dashboard" href="#dashboard">
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all text-label-md font-label-md cursor-pointer" data-tab="queue" href="#queue">
+          <span class="material-symbols-outlined text-[20px]">queue</span>
+          Live Queue
+        </a>
+      </li>
+      <li>
+        <a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all text-label-md font-label-md cursor-pointer" data-tab="inventory" href="#inventory">
+          <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+          Inventory
+        </a>
+      </li>
+      <li>
+        <a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all text-label-md font-label-md cursor-pointer" data-tab="bulk" href="#bulk">
+          <span class="material-symbols-outlined text-[20px]">reorder</span>
+          Bulk Orders
+        </a>
+      </li>
+      <li>
+        <a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all text-label-md font-label-md cursor-pointer" data-tab="uncollected" href="#uncollected">
+          <span class="material-symbols-outlined text-[20px]">shopping_basket</span>
+          Uncollected
+        </a>
+      </li>
+      <li>
+        <a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all text-label-md font-label-md cursor-pointer" data-tab="menu-management" href="#menu-management">
+          <span class="material-symbols-outlined text-[20px]">restaurant_menu</span>
+          Menu Management
+        </a>
+      </li>
+      <li>
+        <a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all text-label-md font-label-md cursor-pointer" href="engine.html">
+          <span class="material-symbols-outlined text-[20px] text-secondary-container">bolt</span>
+          Smart Engine
+        </a>
+      </li>
+    </ul>
+
+    <!-- CTA -->
+    <div class="px-lg mt-auto pt-md border-t border-outline-variant/20 flex flex-col gap-sm">
+      <button class="w-full bg-surface-container-low text-primary py-md rounded border border-outline-variant text-label-md font-label-md hover:bg-surface-variant transition-colors flex items-center justify-center gap-2 cursor-pointer" data-action="switch-student-view">
+        <span class="material-symbols-outlined text-sm">swap_horiz</span>
+        Switch to Student View
+      </button>
+      <button class="w-full text-xs text-on-primary-container opacity-60 hover:opacity-100 py-1 transition-opacity text-center cursor-pointer" onclick="window.canteeneryStore.resetDemoData();">
+        Reset Demo Data
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 md:ml-[280px] h-full overflow-y-auto bg-background flex flex-col">
+    
+    <!-- Top App Bar (Mobile) -->
+    <div class="md:hidden flex items-center justify-between p-md bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-40">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-secondary-container">restaurant</span>
+        <h1 class="text-headline-sm font-bold text-primary">Canteenery Kitchen</h1>
+      </div>
+      <button id="kitchen-mobile-menu-toggle" class="p-2 text-primary">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+
+    <div class="p-gutter max-w-container-max mx-auto w-full flex-1 flex flex-col gap-gutter">
+      
+      <!-- Top Header Section -->
+      <header class="flex flex-col md:flex-row md:items-end justify-between gap-md border-b border-outline-variant/50 pb-md">
+        <div>
+          <h2 class="text-headline-lg font-headline-lg text-primary tracking-tight font-bold">Canteenery Kitchen Command Center</h2>
+          <p class="text-body-lg font-body-lg text-on-surface-variant mt-xs">Live overview of today's kitchen operations & order fulfillment.</p>
+        </div>
+        <div class="flex items-center gap-sm bg-surface-container rounded-full px-md py-sm border border-outline-variant/30 shrink-0">
+          <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+          <span class="text-label-md font-label-md text-primary font-bold">System Live</span>
+        </div>
+      </header>
+
+      <!-- KPIs Bento Grid -->
+      <section class="grid grid-cols-2 md:grid-cols-4 gap-md">
+        <!-- KPI 1 -->
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col shadow-sm">
+          <span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-sm font-semibold">Active Orders</span>
+          <span id="kpi-active-count" class="text-display-lg font-display-lg text-primary">0</span>
+        </div>
+        <!-- KPI 2 -->
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col shadow-sm">
+          <span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-sm font-semibold">Preparing</span>
+          <span id="kpi-prep-count" class="text-display-lg font-display-lg text-secondary-container font-bold">0</span>
+        </div>
+        <!-- KPI 3 -->
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col shadow-sm">
+          <span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-sm font-semibold">Ready for Pickup</span>
+          <span id="kpi-ready-count" class="text-display-lg font-display-lg text-surface-tint font-bold">0</span>
+        </div>
+        <!-- KPI 4 (Load) -->
+        <div id="kpi-load-card" class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col relative overflow-hidden shadow-sm">
+          <div class="relative z-10">
+            <span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-sm flex items-center gap-xs font-semibold">
+              <span class="material-symbols-outlined text-sm">speed</span> Kitchen Load
+            </span>
+            <div class="flex items-baseline gap-xs">
+              <span id="kpi-load-percent" class="text-display-lg font-display-lg text-primary">0%</span>
+              <span id="kpi-load-level" class="text-label-md font-label-md text-on-surface-variant font-bold ml-1">LOW</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 1: DASHBOARD OVERVIEW -->
+      <!-- ========================================== -->
+      <section id="view-dashboard" class="kitchen-view-section grid grid-cols-1 xl:grid-cols-3 gap-gutter flex-1">
+        
+        <!-- Live Order Queue Snippet (2 columns) -->
+        <div class="xl:col-span-2 flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+          <div class="p-md border-b border-outline-variant bg-surface-bright flex justify-between items-center">
+            <h3 class="text-headline-sm font-headline-sm text-primary flex items-center gap-sm font-bold">
+              <span class="material-symbols-outlined">format_list_bulleted</span>
+              LIVE ORDER QUEUE
+            </h3>
+            <div class="flex items-center gap-sm">
+              <span id="dashboard-orders-ahead-badge" class="text-label-sm font-label-sm bg-surface-variant text-on-surface-variant px-sm py-xs rounded-full font-semibold">0 active orders</span>
+              <a href="#queue" onclick="switchTab('queue');" class="text-label-sm text-secondary-container hover:underline font-bold">View All &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Bulk Alert Banner in Dashboard if any -->
+          <div id="dashboard-bulk-alert-banner" class="hidden bg-error-container/60 border-b border-error/30 p-sm px-md flex items-center justify-between text-sm">
+            <div class="flex items-center gap-2 text-error font-bold">
+              <span class="material-symbols-outlined text-base">warning</span>
+              <span id="dashboard-bulk-alert-text">Bulk Orders Pending Review</span>
+            </div>
+            <a href="#bulk" onclick="switchTab('bulk');" class="text-xs bg-error text-white px-2 py-1 rounded font-semibold hover:opacity-90">Open Bulk View</a>
+          </div>
+
+          <!-- Queue Items List -->
+          <div id="dashboard-queue-list" class="flex-1 p-md flex flex-col gap-md overflow-y-auto max-h-[540px]">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Capacity Analytics Gauge (Right Column) -->
+        <div class="xl:col-span-1 flex flex-col gap-md">
+          <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col items-center justify-center relative overflow-hidden shadow-sm">
+            <h3 class="text-headline-sm font-headline-sm text-primary mb-lg self-start w-full border-b border-outline-variant/30 pb-sm font-bold">Capacity Analytics</h3>
+            
+            <!-- Circular Gauge Widget -->
+            <div class="relative w-44 h-44 mb-lg">
+              <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                <!-- Background Track -->
+                <circle cx="50" cy="50" fill="none" r="45" stroke="#e5efff" stroke-width="8"></circle>
+                <!-- Progress Arc -->
+                <circle id="gauge-progress-ring" class="gauge-ring text-secondary-container" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-linecap="round" stroke-width="8"></circle>
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <span id="gauge-percent-text" class="text-display-lg font-display-lg text-primary leading-none">0<span class="text-headline-md font-semibold">%</span></span>
+                <span id="gauge-level-text" class="text-label-sm font-label-sm text-secondary-container tracking-widest mt-xs font-bold">LOAD</span>
+              </div>
+            </div>
+
+            <!-- Legend Table -->
+            <div class="w-full bg-surface p-md rounded-lg border border-outline-variant/50">
+              <h4 class="text-label-md font-label-md text-on-surface-variant mb-sm border-b border-outline-variant/30 pb-xs font-semibold">Load Thresholds (60 min max cap)</h4>
+              <ul class="flex flex-col gap-xs mt-sm">
+                <li data-threshold-level="LOW" class="flex items-center justify-between text-body-sm font-body-sm">
+                  <div class="flex items-center gap-sm">
+                    <div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+                    <span class="text-on-surface-variant">LOW</span>
+                  </div>
+                  <span class="text-primary font-medium">0–40%</span>
+                </li>
+                <li data-threshold-level="MODERATE" class="flex items-center justify-between text-body-sm font-body-sm">
+                  <div class="flex items-center gap-sm">
+                    <div class="w-3 h-3 rounded-full bg-surface-tint"></div>
+                    <span class="text-on-surface-variant">MODERATE</span>
+                  </div>
+                  <span class="text-primary font-medium">40–70%</span>
+                </li>
+                <li data-threshold-level="HIGH" class="flex items-center justify-between text-body-sm font-body-sm">
+                  <div class="flex items-center gap-sm">
+                    <div class="w-3 h-3 rounded-full bg-secondary-container"></div>
+                    <span class="text-primary font-medium">HIGH</span>
+                  </div>
+                  <span class="text-primary font-medium">70–90%</span>
+                </li>
+                <li data-threshold-level="CRITICAL" class="flex items-center justify-between text-body-sm font-body-sm">
+                  <div class="flex items-center gap-sm">
+                    <div class="w-3 h-3 rounded-full bg-error"></div>
+                    <span class="text-on-surface-variant">CRITICAL</span>
+                  </div>
+                  <span class="text-primary font-medium">90–100%</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Quick Inventory Box -->
+          <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm">
+            <div class="flex justify-between items-center mb-sm border-b border-outline-variant/30 pb-xs">
+              <h4 class="text-label-md font-bold text-primary flex items-center gap-1">
+                <span class="material-symbols-outlined text-base">inventory_2</span> Quick Inventory
+              </h4>
+              <a href="#inventory" onclick="switchTab('inventory');" class="text-xs text-secondary-container font-semibold hover:underline">Manage &rarr;</a>
+            </div>
+            <div id="dashboard-quick-inventory" class="flex flex-col">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 2: FULL LIVE QUEUE -->
+      <!-- ========================================== -->
+      <section id="view-queue" class="kitchen-view-section hidden flex flex-col gap-lg flex-1">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+          <div>
+            <h3 class="text-headline-md font-headline-md font-bold text-primary">Live Order Queue</h3>
+            <p class="text-body-md text-on-surface-variant">Manage and progress student orders through preparation stages.</p>
+          </div>
+          <!-- Filter pills -->
+          <div class="flex flex-wrap items-center gap-xs bg-surface-container-lowest p-1 rounded-full border border-outline-variant">
+            <button class="px-md py-xs rounded-full bg-primary text-on-primary text-label-sm font-semibold cursor-pointer" data-queue-filter="ALL" onclick="currentQueueFilter='ALL'; renderQueueView();">All Active</button>
+            <button class="px-md py-xs rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant text-label-sm font-medium transition-colors cursor-pointer" data-queue-filter="PLACED" onclick="currentQueueFilter='PLACED'; renderQueueView();">Placed</button>
+            <button class="px-md py-xs rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant text-label-sm font-medium transition-colors cursor-pointer" data-queue-filter="ACCEPTED" onclick="currentQueueFilter='ACCEPTED'; renderQueueView();">Accepted</button>
+            <button class="px-md py-xs rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant text-label-sm font-medium transition-colors cursor-pointer" data-queue-filter="PREPARING" onclick="currentQueueFilter='PREPARING'; renderQueueView();">Preparing</button>
+            <button class="px-md py-xs rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant text-label-sm font-medium transition-colors cursor-pointer" data-queue-filter="READY" onclick="currentQueueFilter='READY'; renderQueueView();">Ready</button>
+          </div>
+        </div>
+
+        <div id="full-queue-list" class="flex flex-col gap-md">
+          <!-- Populated dynamically with full order cards -->
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 3: INVENTORY MANAGEMENT -->
+      <!-- ========================================== -->
+      <section id="view-inventory" class="kitchen-view-section hidden flex flex-col gap-lg flex-1">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-xs">
+          <div>
+            <h3 class="text-headline-lg font-headline-lg text-primary font-bold mb-xs">Inventory Management</h3>
+            <p class="text-body-md font-body-md text-on-surface-variant">Monitor availability and prevent orders for unavailable items.</p>
+          </div>
+          <div class="flex items-center gap-sm">
+            <button data-action="open-add-dish" class="bg-secondary-container hover:bg-secondary text-white px-md py-sm rounded-lg text-label-md font-bold transition-all shadow-[0_4px_12px_rgba(253,118,26,0.2)] flex items-center justify-center gap-1.5 cursor-pointer shrink-0">
+              <span class="material-symbols-outlined text-[18px]">add_circle</span> + Add New Dish
+            </button>
+            <div class="hidden sm:flex bg-surface-container-low px-md py-sm rounded-lg border border-outline-variant items-center gap-sm max-w-xs">
+              <span class="material-symbols-outlined text-secondary text-[20px]">info</span>
+              <p class="text-xs text-on-surface-variant leading-tight">Stock changes reflect live on student menus.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="inventory-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 4: BULK ORDERS -->
+      <!-- ========================================== -->
+      <section id="view-bulk" class="kitchen-view-section hidden flex flex-col gap-lg flex-1">
+        <header>
+          <h3 class="text-headline-lg font-headline-lg text-primary font-bold mb-xs">Bulk Orders</h3>
+          <p class="text-body-md text-on-surface-variant">Orders automatically detected as high-volume or batch items (>15 items).</p>
+        </header>
+
+        <div id="bulk-orders-list" class="flex flex-col gap-lg">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 5: UNCOLLECTED ORDERS -->
+      <!-- ========================================== -->
+      <section id="view-uncollected" class="kitchen-view-section hidden flex flex-col gap-lg flex-1">
+        <header>
+          <h3 class="text-headline-lg font-headline-lg text-primary font-bold mb-xs">Uncollected Orders</h3>
+          <p class="text-body-md font-body-md text-on-surface-variant max-w-2xl">Orders that are not collected within their pickup window are moved to the holding workflow.</p>
+        </header>
+
+        <div id="uncollected-orders-list" class="flex flex-col gap-md">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- VIEW 6: MENU MANAGEMENT -->
+      <!-- ========================================== -->
+      <section id="view-menu-management" class="kitchen-view-section hidden flex flex-col gap-lg flex-1">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-md bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary-container text-2xl">restaurant_menu</span>
+              <h3 class="text-headline-lg font-headline-lg text-primary font-bold">Menu Management</h3>
+            </div>
+            <p class="text-body-md text-on-surface-variant mt-1">Keep today's menu fresh and up to date.</p>
+          </div>
+          <button id="add-new-dish-btn" data-action="open-add-dish" class="bg-secondary-container hover:bg-secondary text-white px-lg py-sm rounded-lg text-label-md font-bold transition-all shadow-[0_4px_12px_rgba(253,118,26,0.2)] flex items-center justify-center gap-2 cursor-pointer shrink-0">
+            <span class="material-symbols-outlined text-[20px]">add_circle</span> + Add New Dish
+          </button>
+        </div>
+
+        <div id="admin-menu-items-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+          <!-- Populated dynamically by js/kitchen.js -->
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Modal for Adding / Editing a Dish -->
+    <div id="dish-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden p-md overflow-y-auto">
+      <div class="bg-surface-container-lowest rounded-2xl max-w-lg w-full border border-outline-variant shadow-2xl overflow-hidden my-auto">
+        <div class="p-lg bg-primary text-white flex justify-between items-center">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary-container" id="dish-modal-icon">restaurant_menu</span>
+            <h3 id="dish-modal-title" class="text-headline-sm font-bold">Add New Dish</h3>
+          </div>
+          <button type="button" id="close-dish-modal-btn" class="text-white/70 hover:text-white transition-colors cursor-pointer p-1">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <form id="dish-modal-form" class="p-lg space-y-md">
+          <input type="hidden" id="dish-modal-id" value="" />
+
+          <!-- Dish Name -->
+          <div>
+            <label class="block text-label-sm font-semibold text-primary mb-1">Dish Name *</label>
+            <input type="text" id="dish-modal-name" required placeholder="e.g. Paneer Tikka Roll" class="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md text-on-surface focus:outline-none focus:border-secondary-container" />
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label class="block text-label-sm font-semibold text-primary mb-1">Description</label>
+            <textarea id="dish-modal-desc" rows="2" placeholder="Brief appetizing description..." class="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md text-on-surface focus:outline-none focus:border-secondary-container"></textarea>
+          </div>
+
+          <!-- Category & Dietary -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+            <div>
+              <label class="block text-label-sm font-semibold text-primary mb-1">Category *</label>
+              <select id="dish-modal-category" class="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md text-on-surface focus:outline-none focus:border-secondary-container">
+                <option value="South Indian">South Indian</option>
+                <option value="North Indian">North Indian</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Non-Veg">Non-Veg</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-label-sm font-semibold text-primary mb-1">Dietary Type *</label>
+              <select id="dish-modal-veg" class="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md text-on-surface focus:outline-none focus:border-secondary-container">
+                <option value="true">Veg</option>
+                <option value="false">Non-Veg</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Price & Preparation Time -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+            <div>
+              <label class="block text-label-sm font-semibold text-primary mb-1">Price (₹) *</label>
+              <input type="number" id="dish-modal-price" min="0" step="1" required placeholder="70" class="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md text-on-surface focus:outline-none focus:border-secondary-container" />
+            </div>
+            <div>
+              <label class="block text-label-sm font-semibold text-primary mb-1">Preparation Time (min) *</label>
+              <input type="number" id="dish-modal-prep" min="1" max="120" step="1" required placeholder="8" class="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md text-on-surface focus:outline-none focus:border-secondary-container" />
+            </div>
+          </div>
+
+          <!-- Available Stock & Availability Toggle -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+            <div>
+              <label class="block text-label-sm font-semibold text-primary mb-1">Available Stock (qty) *</label>
+              <input type="number" id="dish-modal-stock" min="0" step="1" required placeholder="15" class="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md text-on-surface focus:outline-none focus:border-secondary-container" />
+            </div>
+            <div>
+              <label class="block text-label-sm font-semibold text-primary mb-1">Availability Status</label>
+              <select id="dish-modal-available" class="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md text-on-surface focus:outline-none focus:border-secondary-container">
+                <option value="true">Available</option>
+                <option value="false">Unavailable</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Image URL & Live Preview -->
+          <div>
+            <label class="block text-label-sm font-semibold text-primary mb-1">Dish Image URL</label>
+            <input type="url" id="dish-modal-image" placeholder="https://images.unsplash.com/..." class="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md text-on-surface focus:outline-none focus:border-secondary-container" />
+            <div class="mt-2 flex items-center gap-3">
+              <div class="w-16 h-16 rounded-lg bg-surface-container overflow-hidden border border-outline-variant shrink-0">
+                <img id="dish-modal-img-preview" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=200&q=80" alt="Preview" class="w-full h-full object-cover" />
+              </div>
+              <p class="text-xs text-on-surface-variant">Paste an image URL or leave empty for a default food image.</p>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="flex justify-end gap-md pt-md border-t border-outline-variant/40">
+            <button type="button" id="cancel-dish-modal-btn" class="px-lg py-sm rounded-lg border border-outline-variant text-primary text-label-md font-semibold hover:bg-surface-container transition-colors cursor-pointer">
+              Cancel
+            </button>
+            <button type="submit" id="save-dish-modal-btn" class="px-xl py-sm rounded-lg bg-secondary-container hover:bg-secondary text-white text-label-md font-bold transition-all shadow-sm cursor-pointer flex items-center gap-1">
+              <span class="material-symbols-outlined text-[18px]">save</span> <span id="save-dish-btn-text">Save Dish</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal for Removing Dish Confirmation -->
+    <div id="remove-dish-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden p-md">
+      <div class="bg-surface-container-lowest rounded-2xl max-w-md w-full border border-outline-variant shadow-2xl p-lg space-y-md my-auto">
+        <div class="flex items-center gap-3 text-error">
+          <span class="material-symbols-outlined text-3xl">delete_forever</span>
+          <h3 class="text-headline-sm font-bold text-primary">Remove Dish</h3>
+        </div>
+        <p class="text-body-md text-on-surface-variant">
+          Are you sure you want to remove <strong id="remove-dish-name" class="text-primary font-bold">this dish</strong> from the menu?
+        </p>
+        <p class="text-xs text-on-surface-variant bg-surface-container p-sm rounded border border-outline-variant/40">
+          Note: Existing and historical orders containing this dish will remain preserved.
+        </p>
+        <div class="flex justify-end gap-md pt-sm">
+          <button type="button" id="cancel-remove-dish-btn" class="px-lg py-sm rounded-lg border border-outline-variant text-primary text-label-md font-semibold hover:bg-surface-container transition-colors cursor-pointer">
+            Cancel
+          </button>
+          <button type="button" id="confirm-remove-dish-btn" class="px-lg py-sm rounded-lg bg-error hover:bg-red-700 text-white text-label-md font-bold transition-colors shadow-sm cursor-pointer">
+            Remove Dish
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full mt-auto bg-surface-container-low border-t border-outline-variant flex flex-col md:flex-row justify-between items-center px-lg py-md max-w-container-max mx-auto shrink-0 text-sm text-on-surface-variant">
+      <p>© 2024 Canteenery Smart Platforms. All rights reserved.</p>
+      <div class="flex gap-md">
+        <a class="text-label-sm hover:text-primary underline decoration-secondary" href="menu.html">Student Menu</a>
+        <a class="text-label-sm hover:text-primary underline decoration-secondary" href="tracking.html">Live Tracking</a>
+        <a class="text-label-sm hover:text-primary underline decoration-secondary" href="about.html">About System</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Modal for Updating Inventory Quantity -->
+  <div id="inventory-update-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden">
+    <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg max-w-md w-full mx-4 shadow-2xl">
+      <div class="flex justify-between items-center mb-md border-b border-outline-variant/30 pb-sm">
+        <h3 class="text-headline-sm font-bold text-primary flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary-container">inventory</span>
+          Update Stock
+        </h3>
+        <button id="close-inv-modal-btn" class="text-on-surface-variant hover:text-primary cursor-pointer">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      
+      <p class="text-body-sm text-on-surface-variant mb-md">
+        Set current in-kitchen stock quantity for: <strong id="inv-modal-item-name" class="text-primary font-bold">Item Name</strong>
+      </p>
+
+      <input type="hidden" id="inv-modal-item-id" value=""/>
+
+      <div class="flex flex-col gap-sm mb-lg">
+        <label class="text-label-sm font-semibold text-on-surface-variant">Stock Quantity Remaining</label>
+        <div class="flex items-center gap-2">
+          <button type="button" class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center text-lg font-bold text-primary hover:bg-surface-container" onclick="document.getElementById('inv-modal-quantity-input').value = Math.max(0, parseInt(document.getElementById('inv-modal-quantity-input').value||0) - 1)">-</button>
+          <input id="inv-modal-quantity-input" type="number" min="0" max="999" class="flex-1 rounded border border-outline-variant p-2 text-center text-headline-sm font-bold text-primary focus:ring-2 focus:ring-secondary-container" value="10"/>
+          <button type="button" class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center text-lg font-bold text-primary hover:bg-surface-container" onclick="document.getElementById('inv-modal-quantity-input').value = parseInt(document.getElementById('inv-modal-quantity-input').value||0) + 1">+</button>
+        </div>
+        <div class="flex gap-2 mt-2">
+          <button type="button" class="px-2.5 py-1 text-xs rounded bg-surface-variant text-primary font-semibold hover:bg-surface-container" onclick="document.getElementById('inv-modal-quantity-input').value = '0'">Set 0 (Sold Out)</button>
+          <button type="button" class="px-2.5 py-1 text-xs rounded bg-surface-variant text-primary font-semibold hover:bg-surface-container" onclick="document.getElementById('inv-modal-quantity-input').value = '5'">Set 5 (Low Stock)</button>
+          <button type="button" class="px-2.5 py-1 text-xs rounded bg-surface-variant text-primary font-semibold hover:bg-surface-container" onclick="document.getElementById('inv-modal-quantity-input').value = '25'">Set 25 (Available)</button>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-sm">
+        <button type="button" onclick="document.getElementById('inventory-update-modal').classList.add('hidden');" class="px-lg py-sm rounded border border-outline-variant text-on-surface-variant font-semibold hover:bg-surface-container">Cancel</button>
+        <button id="save-inv-modal-btn" type="button" class="px-lg py-sm rounded bg-primary text-on-primary font-bold hover:opacity-90 cursor-pointer">Save Inventory</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared store & app logic -->
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/kitchen.js"></script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Uncollected Orders - Canteenery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#5c2400",
+                      "secondary-fixed": "#ffdbca",
+                      "primary-container": "#002147",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed-dim": "#aec7f6",
+                      "on-surface-variant": "#44474e",
+                      "outline-variant": "#c4c6cf",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#341100",
+                      "on-secondary-fixed": "#341100",
+                      "outline": "#74777f",
+                      "on-secondary-fixed-variant": "#783200",
+                      "on-surface": "#0d1c2d",
+                      "surface-bright": "#f8f9ff",
+                      "surface-variant": "#d4e4fa",
+                      "secondary-container": "#fd761a",
+                      "secondary-fixed-dim": "#ffb690",
+                      "on-primary-fixed-variant": "#2d476f",
+                      "tertiary-fixed": "#ffdbcb",
+                      "primary": "#000a1e",
+                      "surface-tint": "#465f88",
+                      "tertiary": "#180500",
+                      "surface": "#f8f9ff",
+                      "secondary": "#9d4300",
+                      "surface-container": "#e5efff",
+                      "inverse-primary": "#aec7f6",
+                      "on-primary-fixed": "#001b3d",
+                      "surface-container-high": "#dbe9ff",
+                      "on-secondary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-container": "#b97958",
+                      "error": "#ba1a1a",
+                      "surface-container-low": "#eef4ff",
+                      "on-error-container": "#93000a",
+                      "background": "#f8f9ff",
+                      "inverse-on-surface": "#e9f1ff",
+                      "on-primary-container": "#708ab5",
+                      "tertiary-fixed-dim": "#ffb691",
+                      "on-background": "#0d1c2d",
+                      "tertiary-container": "#3d1500",
+                      "primary-fixed": "#d6e3ff",
+                      "inverse-surface": "#233143",
+                      "surface-container-highest": "#d4e4fa",
+                      "on-tertiary-fixed-variant": "#6c391d",
+                      "on-primary": "#ffffff",
+                      "surface-dim": "#ccdbf2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "2xl": "48px",
+                      "sm": "8px",
+                      "xl": "32px",
+                      "xs": "4px",
+                      "base": "8px",
+                      "lg": "24px",
+                      "container-max": "1280px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-primary dark:bg-primary shadow-lg shadow-md flex flex-col h-full py-xl z-50 hidden md:flex">
+<div class="px-lg mb-xl flex flex-col gap-sm">
+<h1 class="text-headline-sm font-headline-sm font-black text-on-primary">Canteenery</h1>
+</div>
+<div class="px-lg mb-xl flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface">person</span>
+</div>
+<div>
+<p class="text-body-md font-body-md font-semibold text-on-primary">Kitchen Staff</p>
+<p class="text-label-sm font-label-sm text-primary-fixed-dim">Main Kitchen - Block A</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-xs">
+<a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="queue">queue</span>
+<span class="text-label-md font-label-md">Live Queue</span>
+</a>
+<a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-label-md font-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="reorder">reorder</span>
+<span class="text-label-md font-label-md">Bulk Orders</span>
+</a>
+<a class="flex items-center gap-md bg-transparent text-secondary-fixed border-l-4 border-secondary-container px-lg py-md scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined filled-icon" data-icon="shopping_basket">shopping_basket</span>
+<span class="text-label-md font-label-md">Uncollected</span>
+</a>
+</nav>
+<div class="px-lg mt-auto">
+<button class="w-full py-sm px-md rounded border border-outline-variant text-on-primary text-label-sm font-label-sm hover:bg-primary-container transition-colors">Switch to Student View</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-[280px] p-md md:p-gutter max-w-container-max flex flex-col">
+<!-- Header -->
+<header class="mb-xl">
+<h1 class="text-headline-lg font-headline-lg text-on-surface mb-xs">Uncollected Orders</h1>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-2xl">Orders that are not collected within their pickup window are moved to the holding workflow.</p>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 grid grid-cols-1 gap-gutter">
+<!-- Order Card: SC-1032 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col md:flex-row relative">
+<!-- Status Accent Bar -->
+<div class="w-2 md:w-4 bg-error flex-shrink-0"></div>
+<div class="flex-1 p-lg flex flex-col justify-between">
+<div class="flex flex-col md:flex-row md:items-start justify-between gap-md mb-lg">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<h2 class="text-headline-md font-headline-md text-on-surface">#SC-1032</h2>
+<span class="bg-error-container text-on-error-container text-label-sm font-label-sm px-2 py-1 rounded-full border border-error">NOT COLLECTED</span>
+</div>
+<div class="flex flex-wrap items-center gap-md text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Ready since: 12:15 PM</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">alarm</span>
+<span>Pickup Slot: 12:15 – 12:30</span>
+</div>
+</div>
+</div>
+<!-- Customer Info Snippet -->
+<div class="bg-surface rounded-lg p-md border border-outline-variant min-w-[200px]">
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-xs uppercase tracking-wider">Student Details</p>
+<p class="text-body-md font-body-md font-medium text-on-surface">John Doe</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">ID: 20239012</p>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-wrap items-center gap-md pt-md border-t border-outline-variant">
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg text-label-md font-label-md flex items-center gap-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">notifications_active</span>
+                            Notify Student
+                        </button>
+<button class="bg-surface-container-lowest border border-outline px-lg py-sm rounded-lg text-primary text-label-md font-label-md flex items-center gap-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">move_to_inbox</span>
+                            Move to Holding
+                        </button>
+<button class="bg-surface-container-lowest border border-error text-error px-lg py-sm rounded-lg text-label-md font-label-md flex items-center gap-sm hover:bg-error-container transition-colors ml-auto">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+                            Mark Uncollected
+                        </button>
+</div>
+</div>
+</div>
+<!-- Order Card: SC-1045 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col md:flex-row relative opacity-80">
+<!-- Status Accent Bar -->
+<div class="w-2 md:w-4 bg-secondary-container flex-shrink-0"></div>
+<div class="flex-1 p-lg flex flex-col justify-between">
+<div class="flex flex-col md:flex-row md:items-start justify-between gap-md mb-lg">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<h2 class="text-headline-md font-headline-md text-on-surface">#SC-1045</h2>
+<span class="bg-secondary text-on-secondary text-label-sm font-label-sm px-2 py-1 rounded-full">HOLDING</span>
+</div>
+<div class="flex flex-wrap items-center gap-md text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Ready since: 11:45 AM</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">alarm</span>
+<span>Pickup Slot: 11:45 – 12:00</span>
+</div>
+</div>
+</div>
+<!-- Customer Info Snippet -->
+<div class="bg-surface rounded-lg p-md border border-outline-variant min-w-[200px]">
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-xs uppercase tracking-wider">Student Details</p>
+<p class="text-body-md font-body-md font-medium text-on-surface">Jane Smith</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">ID: 20214567</p>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-wrap items-center gap-md pt-md border-t border-outline-variant">
+<button class="bg-surface-container-lowest border border-outline px-lg py-sm rounded-lg text-primary text-label-md font-label-md flex items-center gap-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+                            Remind Student
+                        </button>
+<button class="bg-surface-container-lowest border border-error text-error px-lg py-sm rounded-lg text-label-md font-label-md flex items-center gap-sm hover:bg-error-container transition-colors ml-auto">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                            Discard Order
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

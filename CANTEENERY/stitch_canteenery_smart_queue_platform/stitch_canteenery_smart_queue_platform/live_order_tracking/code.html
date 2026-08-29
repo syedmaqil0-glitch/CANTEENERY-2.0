@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Track Your Order - Canteenery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#5c2400",
+                        "secondary-fixed": "#ffdbca",
+                        "primary-container": "#002147",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#aec7f6",
+                        "on-surface-variant": "#44474e",
+                        "outline-variant": "#c4c6cf",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#341100",
+                        "on-secondary-fixed": "#341100",
+                        "outline": "#74777f",
+                        "on-secondary-fixed-variant": "#783200",
+                        "on-surface": "#0d1c2d",
+                        "surface-bright": "#f8f9ff",
+                        "surface-variant": "#d4e4fa",
+                        "secondary-container": "#fd761a",
+                        "secondary-fixed-dim": "#ffb690",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "tertiary-fixed": "#ffdbcb",
+                        "primary": "#000a1e",
+                        "surface-tint": "#465f88",
+                        "tertiary": "#180500",
+                        "surface": "#f8f9ff",
+                        "secondary": "#9d4300",
+                        "surface-container": "#e5efff",
+                        "inverse-primary": "#aec7f6",
+                        "on-primary-fixed": "#001b3d",
+                        "surface-container-high": "#dbe9ff",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#b97958",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#eef4ff",
+                        "on-error-container": "#93000a",
+                        "background": "#f8f9ff",
+                        "inverse-on-surface": "#e9f1ff",
+                        "on-primary-container": "#708ab5",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "on-background": "#0d1c2d",
+                        "tertiary-container": "#3d1500",
+                        "primary-fixed": "#d6e3ff",
+                        "inverse-surface": "#233143",
+                        "surface-container-highest": "#d4e4fa",
+                        "on-tertiary-fixed-variant": "#6c391d",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#ccdbf2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "2xl": "48px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "lg": "24px",
+                        "container-max": "1280px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pulse-animation {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(253, 118, 26, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(253, 118, 26, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(253, 118, 26, 0); }
+        }
+        .progress-bar-fill {
+            transition: width 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-container-lowest border-b border-outline-variant dark:border-outline-variant w-full z-50 sticky top-0">
+<div class="flex justify-between items-center w-full px-lg max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-md">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">Canteenery</span>
+</div>
+<nav class="hidden md:flex gap-lg">
+<a class="text-on-surface-variant font-medium text-label-md font-label-md hover:text-secondary transition-colors duration-200" href="#">Home</a>
+<a class="text-on-surface-variant font-medium text-label-md font-label-md hover:text-secondary transition-colors duration-200" href="#">Menu</a>
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 text-label-md font-label-md opacity-80 transition-all duration-200" href="#">My Orders</a>
+<a class="text-on-surface-variant font-medium text-label-md font-label-md hover:text-secondary transition-colors duration-200" href="#">Kitchen Status</a>
+<a class="text-on-surface-variant font-medium text-label-md font-label-md hover:text-secondary transition-colors duration-200" href="#">About</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="p-2 text-secondary dark:text-secondary-fixed hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="p-2 text-secondary dark:text-secondary-fixed hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-md md:px-lg py-xl">
+<div class="mb-lg">
+<h1 class="text-headline-lg font-headline-lg text-primary mb-sm">Track Your Order</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Order #SC-1048</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left Column: Status & Timeline -->
+<div class="lg:col-span-2 space-y-lg">
+<!-- Current Status Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<div class="flex items-center gap-md mb-md">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center pulse-animation">
+<span class="material-symbols-outlined text-2xl" data-icon="restaurant_menu">restaurant_menu</span>
+</div>
+<div>
+<h2 class="text-headline-sm font-headline-sm text-primary">Preparing your order</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Your order is being prepared. Please arrive around your assigned pickup slot.</p>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="mt-lg">
+<div class="flex justify-between text-label-sm font-label-sm text-on-surface-variant mb-xs">
+<span>Prep Progress</span>
+<span>80%</span>
+</div>
+<div class="w-full h-2 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full progress-bar-fill" style="width: 80%;"></div>
+</div>
+</div>
+</div>
+<!-- Timeline -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<h3 class="text-headline-sm font-headline-sm text-primary mb-lg">Order Status</h3>
+<div class="relative pl-6 border-l-2 border-surface-variant space-y-xl ml-4">
+<!-- Placed (Done) -->
+<div class="relative">
+<div class="absolute -left-[35px] top-0 w-6 h-6 rounded-full bg-surface-tint flex items-center justify-center z-10 text-on-primary">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<p class="text-body-md font-body-md font-semibold text-primary">Placed</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">10:15 AM</p>
+</div>
+<!-- Accepted (Done) -->
+<div class="relative">
+<div class="absolute -left-[35px] top-0 w-6 h-6 rounded-full bg-surface-tint flex items-center justify-center z-10 text-on-primary">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<p class="text-body-md font-body-md font-semibold text-primary">Accepted</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">10:18 AM</p>
+</div>
+<!-- Preparing (Active) -->
+<div class="relative">
+<div class="absolute -left-[35px] top-0 w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center z-10 text-on-secondary-container ring-4 ring-secondary-container/20">
+<div class="w-2 h-2 rounded-full bg-on-secondary-container"></div>
+</div>
+<p class="text-body-md font-body-md font-semibold text-secondary-container">Preparing</p>
+<p class="text-label-sm font-label-sm text-secondary-container">Current Phase</p>
+</div>
+<!-- Ready (Pending) -->
+<div class="relative">
+<div class="absolute -left-[35px] top-0 w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center z-10 border-2 border-surface-container-highest">
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant">Ready</p>
+</div>
+<!-- Collected (Pending) -->
+<div class="relative">
+<div class="absolute -left-[35px] top-0 w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center z-10 border-2 border-surface-container-highest">
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant">Collected</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Stats & Summary -->
+<div class="space-y-lg">
+<!-- Live Stats Bento Grid -->
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-surface-container-low rounded-xl p-md border border-outline-variant flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-primary-container mb-xs" data-icon="group">group</span>
+<span class="text-headline-md font-headline-md text-primary">3</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Orders Ahead</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-md border border-outline-variant flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-error mb-xs" data-icon="local_fire_department">local_fire_department</span>
+<span class="text-headline-md font-headline-md text-primary">62%</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Kitchen Load</span>
+</div>
+</div>
+<!-- Order Info -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm space-y-md">
+<h3 class="text-headline-sm font-headline-sm text-primary border-b border-outline-variant pb-xs">Order Summary</h3>
+<div class="flex justify-between items-center text-body-md font-body-md">
+<span class="text-on-surface-variant">Pickup Location</span>
+<span class="font-semibold text-primary">Main Canteen - Block A</span>
+</div>
+<div class="flex justify-between items-center text-body-md font-body-md">
+<span class="text-on-surface-variant">Est. Prep Time</span>
+<span class="font-semibold text-primary">~12 Mins</span>
+</div>
+<div class="flex justify-between items-center text-body-md font-body-md">
+<span class="text-on-surface-variant">Total Items</span>
+<span class="font-semibold text-primary">2</span>
+</div>
+<button class="w-full mt-md py-sm px-md rounded-lg bg-surface-container hover:bg-surface-container-high text-primary-container font-label-md text-label-md border border-outline-variant transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="receipt_long">receipt_long</span>
+                        View Order Details
+                    </button>
+</div>
+<!-- Decorative Image/Map Placeholder -->
+<div class="bg-cover bg-center w-full h-48 rounded-xl border border-outline-variant shadow-sm hidden md:block" data-alt="A top-down view of a modern, clean canteen service counter area. The scene is brightly lit with cool, white light emphasizing hygiene and efficiency. Stainless steel surfaces gleam, while subtle orange and navy blue branding elements tie into a corporate-modern aesthetic. The mood is bustling yet highly organized." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAxagWEOdZFToGU2w7HCYmIKa-rKJlePiHJ2vTB5xvK2pAEDpf0hnhSJ2SIo6yhI6BL3AzErsC5BTP8WYjJyfD18tAgfzbg1fbGc6cMFZePXSiKK1gtq_8rZDy6KQY_VQ7A7xQhBr7MNKxQX2J9NWNPBHDsWfBL67sEyY4bAKfBttqEHTDfIls33A5rljMLNrks72H0AWxrkv5DW_2-lORGtDBRb5Vk_PIxSprx4ro64Xs9gHgEyh2B')"></div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto bg-surface-container-low dark:bg-surface-dim border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center px-lg py-xl max-w-container-max mx-auto">
+<span class="text-body-md font-bold text-primary mb-md md:mb-0">© 2024 Canteenery Smart Platforms. All rights reserved.</span>
+<div class="flex gap-md">
+<a class="text-on-surface-variant text-body-sm font-body-sm hover:text-primary underline decoration-secondary Transition-colors duration-200" href="#">Support</a>
+<a class="text-on-surface-variant text-body-sm font-body-sm hover:text-primary underline decoration-secondary Transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant text-body-sm font-body-sm hover:text-primary underline decoration-secondary Transition-colors duration-200" href="#">Terms of Service</a>
+<a class="text-on-surface-variant text-body-sm font-body-sm hover:text-primary underline decoration-secondary Transition-colors duration-200" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+<script>
+        // Trigger progress bar animation on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const bar = document.querySelector('.progress-bar-fill');
+            if(bar) {
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = '80%';
+                }, 100);
+            }
+        });
+    </script>
+</body></html>
