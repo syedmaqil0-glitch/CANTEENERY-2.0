@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Today's Menu - Canteenery</title>
+<!-- Google Fonts: Inter & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#5c2400",
+                    "secondary-fixed": "#ffdbca",
+                    "primary-container": "#002147",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#aec7f6",
+                    "on-surface-variant": "#44474e",
+                    "outline-variant": "#c4c6cf",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#341100",
+                    "on-secondary-fixed": "#341100",
+                    "outline": "#74777f",
+                    "on-secondary-fixed-variant": "#783200",
+                    "on-surface": "#0d1c2d",
+                    "surface-bright": "#f8f9ff",
+                    "surface-variant": "#d4e4fa",
+                    "secondary-container": "#fd761a",
+                    "secondary-fixed-dim": "#ffb690",
+                    "on-primary-fixed-variant": "#2d476f",
+                    "tertiary-fixed": "#ffdbcb",
+                    "primary": "#000a1e",
+                    "surface-tint": "#465f88",
+                    "tertiary": "#180500",
+                    "surface": "#f8f9ff",
+                    "secondary": "#9d4300",
+                    "surface-container": "#e5efff",
+                    "inverse-primary": "#aec7f6",
+                    "on-primary-fixed": "#001b3d",
+                    "surface-container-high": "#dbe9ff",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#b97958",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#eef4ff",
+                    "on-error-container": "#93000a",
+                    "background": "#f8f9ff",
+                    "inverse-on-surface": "#e9f1ff",
+                    "on-primary-container": "#708ab5",
+                    "tertiary-fixed-dim": "#ffb691",
+                    "on-background": "#0d1c2d",
+                    "tertiary-container": "#3d1500",
+                    "primary-fixed": "#d6e3ff",
+                    "inverse-surface": "#233143",
+                    "surface-container-highest": "#d4e4fa",
+                    "on-tertiary-fixed-variant": "#6c391d",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#ccdbf2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "2xl": "48px",
+                    "sm": "8px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "lg": "24px",
+                    "container-max": "1280px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            },
+            "boxShadow": {
+                "ambient": "0px 4px 12px rgba(0, 33, 71, 0.05)",
+                "modal": "0px 12px 32px rgba(0, 33, 71, 0.15)"
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        
+        /* Custom scrollbar for horizontal lists */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased">
+<!-- TopNavBar (From JSON) -->
+<nav class="bg-surface-container-lowest border-b border-outline-variant w-full sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-lg max-w-container-max mx-auto h-16">
+<!-- Brand -->
+<div class="flex items-center gap-md">
+<span class="text-headline-md font-headline-md font-bold text-primary">Canteenery</span>
+</div>
+<!-- Desktop Navigation Links -->
+<div class="hidden md:flex items-center gap-lg">
+<a class="text-on-surface-variant font-medium text-label-md font-label-md hover:text-secondary transition-colors duration-200" href="#">Home</a>
+<!-- Active Navigation: Menu -->
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 text-label-md font-label-md opacity-80 transition-all duration-200" href="#">Menu</a>
+<a class="text-on-surface-variant font-medium text-label-md font-label-md hover:text-secondary transition-colors duration-200" href="#">My Orders</a>
+<a class="text-on-surface-variant font-medium text-label-md font-label-md hover:text-secondary transition-colors duration-200" href="#">Kitchen Status</a>
+<a class="text-on-surface-variant font-medium text-label-md font-label-md hover:text-secondary transition-colors duration-200" href="#">About</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-md">
+<!-- Search (on left of actions as requested, but placed here for balance) -->
+<button class="text-secondary hover:text-secondary-container transition-colors p-sm rounded-full">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="text-secondary hover:text-secondary-container transition-colors p-sm rounded-full relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-secondary-container rounded-full"></span>
+</button>
+<button class="text-secondary hover:text-secondary-container transition-colors p-sm rounded-full">
+<span class="material-symbols-outlined icon-fill">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-md md:px-lg py-xl">
+<!-- Header Section -->
+<header class="mb-xl text-center md:text-left">
+<h1 class="text-display-lg font-display-lg text-primary mb-sm">Today's Menu</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Fresh, hygienic and affordable food from your campus canteen.</p>
+</header>
+<!-- Search & Filter Bar -->
+<section class="mb-lg flex flex-col md:flex-row gap-md items-center justify-between">
+<!-- Search Input -->
+<div class="relative w-full md:w-96 group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary-container transition-colors">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-sm pl-[44px] pr-md text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all shadow-sm" placeholder="Search the menu..." type="text"/>
+</div>
+<!-- Category Navigation (Horizontal Scroll) -->
+<div class="w-full overflow-x-auto hide-scrollbar flex items-center gap-sm pb-xs">
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-primary-container text-on-primary-container text-label-md font-label-md shadow-sm transition-colors">All</button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-label-md font-label-md transition-colors">Breakfast</button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-label-md font-label-md transition-colors">South Indian</button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-label-md font-label-md transition-colors">North Indian</button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-label-md font-label-md transition-colors">Chinese</button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-label-md font-label-md transition-colors">Snacks</button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-label-md font-label-md transition-colors">Beverages</button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-label-md font-label-md transition-colors">Non-Veg</button>
+</div>
+</section>
+<!-- Menu Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+<!-- Item 1: Masala Dosa -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden group hover:shadow-ambient transition-all duration-300 flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A top-down view of a perfectly crisp golden-brown Masala Dosa served on a pristine white ceramic plate. Accompanying it are three small bowls containing vibrant green coconut chutney, bright orange tomato chutney, and rich yellow sambar. The lighting is soft and natural, emphasizing the texture of the dosa and the fresh colors of the dips, set against a modern clean wooden table." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0nvnANRBszws7PCoSw2iCPYVwC4bcHTsX5z185mSLAGKQBLHYp58jd1hZV-XpVDhPeq8gx3kG_ziZzLDpTuwXBdshs1n_bGVCc_gyQAUNAt0nKMZxfTzzMZ-M6EYiu5-5TX-yEwicqKMPE93m7rQBjg0o4J2NSBdFczbxVt-fNBcBp9DWBeuKW7P9PVEVJL2YKe_WRB3MnUXJEl8UaZ39zoOgKt0hotY9NWOOxnCvaYICx5DJwdJ7"/>
+<div class="absolute top-sm right-sm bg-surface-container-lowest p-xs rounded-sm shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-[#166534]">fiber_manual_record</span>
+<span class="sr-only">Veg</span>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">MASALA DOSA</h3>
+<span class="text-headline-sm font-headline-sm text-secondary-container">₹50</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-md flex-grow">Crispy rice crepe filled with spiced potato curry, served with sambar and chutney.</p>
+<div class="flex flex-col gap-sm mt-auto">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="flex items-center gap-xs text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">schedule</span> Prep: 8 min</span>
+<span class="bg-[#dcfce7] text-[#166534] px-sm py-[2px] rounded-full">Available</span>
+</div>
+<button class="w-full mt-sm bg-secondary-container hover:bg-[#e06512] text-on-tertiary text-label-md font-label-md py-sm rounded-lg transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add</span> Add
+                        </button>
+</div>
+</div>
+</article>
+<!-- Item 2: Veg Sandwich -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden group hover:shadow-ambient transition-all duration-300 flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A close-up shot of a freshly grilled vegetable sandwich cut diagonally into two triangles. The bread is perfectly toasted with distinct grill marks. Visible fillings include vibrant green lettuce, bright red tomato slices, and melting cheese. The background is a clean, slightly blurred minimalist café setting with cool, bright lighting highlighting the freshness of the ingredients." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYtEJqel6iiL6biS9Prz37ayyWxCR7tMiMyvO95431vVEhs5rMnOAAgFvgiNVifkoqE-dleJ0UBi-llosc6p3rRkWybD16HpzlzDhe5tqmAF2s-XqlKYsfuVd1cx7o-y4hBRvAZaSFZLAVDUY7yYK4rIfH1Pd6LQlpPcRqH8H58MYvmXBImGFuiM6RwsO7EsOVRqCzSHp8_GOm5riAuzkp-XMGNuMu3dd8nrpnmA_ZekY3fZDsQ_bv"/>
+<div class="absolute top-sm right-sm bg-surface-container-lowest p-xs rounded-sm shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-[#166534]">fiber_manual_record</span>
+<span class="sr-only">Veg</span>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">VEG SANDWICH</h3>
+<span class="text-headline-sm font-headline-sm text-secondary-container">₹40</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-md flex-grow">Grilled sandwich loaded with fresh veggies and mint mayo.</p>
+<div class="flex flex-col gap-sm mt-auto">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="flex items-center gap-xs text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">schedule</span> Prep: 5 min</span>
+<span class="bg-[#dcfce7] text-[#166534] px-sm py-[2px] rounded-full">Available</span>
+</div>
+<button class="w-full mt-sm bg-secondary-container hover:bg-[#e06512] text-on-tertiary text-label-md font-label-md py-sm rounded-lg transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add</span> Add
+                        </button>
+</div>
+</div>
+</article>
+<!-- Item 3: Veg Fried Rice -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden group hover:shadow-ambient transition-all duration-300 flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A steaming bowl of vegetable fried rice presented in a sleek, matte black bowl. Plump grains of rice are wok-tossed with vibrant green peas, bright orange diced carrots, and spring onions. A hint of soy sauce gives the dish a rich golden hue. The image is taken under warm, inviting directional light, emphasizing the appetizing texture and fresh steam rising from the bowl." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZNQzdrxR_S2mORAyoxhCewnUMZ_y2ij5GoQPsmR184BrHAessFdylZ--m5Z9dbtnCy9DA58QzOqq8p-cANDHkiXSATayoKDL4TDOOYDXKkIIoCLit83Rr7bLkNAks8qQLpGvikcIL1v7d1owApKuBNdjSINgS6LinQyzGRI0JQNUIxxjXkVnG_E5XjRf6ruWJrOLKh-OXB-TKBtHxELnyMsSYv26E4V8Cz09pUOpYbrczCM3TtaQ_"/>
+<div class="absolute top-sm right-sm bg-surface-container-lowest p-xs rounded-sm shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-[#166534]">fiber_manual_record</span>
+<span class="sr-only">Veg</span>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">VEG FRIED RICE</h3>
+<span class="text-headline-sm font-headline-sm text-secondary-container">₹70</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-md flex-grow">Wok-tossed rice with seasonal vegetables and mild soy.</p>
+<div class="flex flex-col gap-sm mt-auto">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="flex items-center gap-xs text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">schedule</span> Prep: 10 min</span>
+<span class="bg-[#dcfce7] text-[#166534] px-sm py-[2px] rounded-full">Available</span>
+</div>
+<button class="w-full mt-sm bg-secondary-container hover:bg-[#e06512] text-on-tertiary text-label-md font-label-md py-sm rounded-lg transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add</span> Add
+                        </button>
+</div>
+</div>
+</article>
+<!-- Item 4: Chicken Biryani -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden group hover:shadow-ambient transition-all duration-300 flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A rich, aromatic portion of Chicken Biryani served in an elegant copper handi. The long-grain basmati rice is beautifully layered in shades of white, saffron yellow, and deep orange. Succulent pieces of spiced chicken are visible. The dish is garnished with golden fried onions and fresh green cilantro. The lighting is cinematic and warm, highlighting the luxurious texture and spices of the dish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDCwpuKPBlmdBzBz56vBujp-iJp3rKmObixllnnTZqWO-TwORH-DbUa80FdB-IbKULPpjXKuEsLePpaBU2Mne92kDjs1WVYOwIa56SgCHlLAJeUkMEFAULfNcIJwD3NHeKtOIJk-VaNa6MSWj5XyoOKXXwamaqYmrLPMqlASZ9kbJRjK1ZMMPxhWqQmdpGsGbGYM3ZaJKxTel1oKD2DpB4pWG-8EM1NEuyo6XBxw7LnmRbmrxoK-zl"/>
+<div class="absolute top-sm right-sm bg-surface-container-lowest p-xs rounded-sm shadow-sm flex items-center justify-center border border-red-200">
+<span class="material-symbols-outlined text-[16px] text-red-600">fiber_manual_record</span>
+<span class="sr-only">Non-Veg</span>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">CHICKEN BIRYANI</h3>
+<span class="text-headline-sm font-headline-sm text-secondary-container">₹120</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-md flex-grow">Aromatic basmati rice cooked with tender chicken and secret spices.</p>
+<div class="flex flex-col gap-sm mt-auto">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="flex items-center gap-xs text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">schedule</span> Prep: 15 min</span>
+<span class="bg-[#dcfce7] text-[#166534] px-sm py-[2px] rounded-full">Available</span>
+</div>
+<button class="w-full mt-sm bg-secondary-container hover:bg-[#e06512] text-on-tertiary text-label-md font-label-md py-sm rounded-lg transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add</span> Add
+                        </button>
+</div>
+</div>
+</article>
+<!-- Item 5: Samosa -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden group hover:shadow-ambient transition-all duration-300 flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Two perfectly fried, golden-brown triangular samosas resting on a clean white plate. The crust is flaky and blistered. Next to them is a small glass dish containing a glossy, dark reddish-brown tamarind chutney. The setting is bright and clean, with a modern cafe aesthetic, using soft daylight to highlight the crispy texture of the pastry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlrHk32H2Jld_NVaj9X87vA-zrg2fzrK2lnbY8AgQj9Osyx2uB80u_4MoOWjhIHl2_NbxMWBJBMLlWr34S7jRcmtkq7a3ipLQOt6RdFPYzAnwD4_dl-Q3mtDs-daZ28FL8V8WPL3_Hbv5f2TiMm8G2xUpJjdyUNwwMi8OjmXG1sPEz8W7F5BKJ7CRSz5x4s7TMNGQZHhyDFWcMq_X2bIV6scnNpQao6vm8iYIv5X_4-49230Y7z5lL"/>
+<div class="absolute top-sm right-sm bg-surface-container-lowest p-xs rounded-sm shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-[#166534]">fiber_manual_record</span>
+<span class="sr-only">Veg</span>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">SAMOSA</h3>
+<span class="text-headline-sm font-headline-sm text-secondary-container">₹20</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-md flex-grow">Crispy pastry filled with spiced potatoes and peas.</p>
+<div class="flex flex-col gap-sm mt-auto">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="flex items-center gap-xs text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">schedule</span> Prep: 4 min</span>
+<span class="bg-[#dcfce7] text-[#166534] px-sm py-[2px] rounded-full">Available</span>
+</div>
+<button class="w-full mt-sm bg-surface-container-lowest border border-outline-variant hover:bg-surface-variant text-primary-container text-label-md font-label-md py-sm rounded-lg transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add</span> Add
+                        </button>
+</div>
+</div>
+</article>
+<!-- Item 6: Cold Coffee (Warning State) -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden group hover:shadow-ambient transition-all duration-300 flex flex-col relative">
+<div class="absolute inset-0 border-2 border-secondary/30 rounded-xl pointer-events-none z-10"></div>
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A tall, condensation-covered glass filled with rich, creamy cold coffee. Ice cubes float near the surface, and the top is adorned with a light froth and a sprinkle of cocoa powder. A reusable stainless steel straw rests inside. The background is a bright, modern interior with soft out-of-focus highlights, giving a refreshing and premium feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFvDCAMtIvaOex5LlzP9K5NejU1viGj07G5_dG8RUnFzW-e4AEyZGtyR2-spq3iPIO7BpLVN6MaW68QGTxpruzDKnlXS9WEM_rRjZ7SEBqVjTnCWb2tZPer2KSxyuOZyqCzWd0wVUPhGh179fr2ps-wuZsu95TuOoZks_UnJFZ-kzKBGjDvJ7HsPWgtQ7i_mEAlmb4IjOGsSrpdHulZlM8e8QIvUZgxjVc9EuzHB2vheSWo5zWuhY1"/>
+<div class="absolute top-sm right-sm bg-surface-container-lowest p-xs rounded-sm shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-[#166534]">fiber_manual_record</span>
+<span class="sr-only">Veg</span>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">COLD COFFEE</h3>
+<span class="text-headline-sm font-headline-sm text-secondary-container">₹50</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-md flex-grow">Chilled milk blended with classic robusta coffee and ice.</p>
+<div class="flex flex-col gap-sm mt-auto">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="flex items-center gap-xs text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">schedule</span> Prep: 3 min</span>
+<span class="bg-[#fef08a] text-[#854d0e] px-sm py-[2px] rounded-full flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">warning</span> Only 4 left</span>
+</div>
+<button class="w-full mt-sm bg-secondary-container hover:bg-[#e06512] text-on-tertiary text-label-md font-label-md py-sm rounded-lg transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add</span> Add
+                        </button>
+</div>
+</div>
+</article>
+<!-- Item 7: Masala Dosa (Sold Out) -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden opacity-60 grayscale-[50%] flex flex-col relative">
+<!-- Sold Out Overlay -->
+<div class="absolute inset-0 bg-surface/40 z-10 flex items-center justify-center backdrop-blur-[1px]">
+<div class="bg-error text-on-error font-headline-sm text-headline-sm px-lg py-xs rounded-lg rotate-[-12deg] shadow-lg border-2 border-white">SOLD OUT</div>
+</div>
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A top-down view of a perfectly crisp golden-brown Masala Dosa served on a pristine white ceramic plate. Accompanying it are three small bowls containing vibrant green coconut chutney, bright orange tomato chutney, and rich yellow sambar. The lighting is soft and natural, emphasizing the texture of the dosa and the fresh colors of the dips, set against a modern clean wooden table." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtynny9h4KKTTfWwewDXsqo6CzMBZ2byhiYv9RfQ9wjd7cn552ynrtIqlG8pORsdjUlnxyqwJ5wM_SRGBBicmXKGUrcJniXbfhe5KxPSUGEgWNmsJPA-7yUa8T3cgM2FeFDiZQS4nN4VXUzX1eTlnlwainplvIHSXQryoj0RMxrp9Tx9lHFwyqcXCRaqJFprmbJnHFgtdpM3hmMxdKGr6-3XBTZnNftCyQZE3-5mz2AWg_jOM50nM8"/>
+</div>
+<div class="p-md flex flex-col flex-grow relative z-0">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface line-through text-outline">MASALA DOSA</h3>
+<span class="text-headline-sm font-headline-sm text-outline line-through">₹50</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-md flex-grow">Crispy rice crepe filled with spiced potato curry, served with sambar and chutney.</p>
+<div class="flex flex-col gap-sm mt-auto">
+<button class="w-full mt-sm bg-surface-variant text-outline text-label-md font-label-md py-sm rounded-lg cursor-not-allowed flex items-center justify-center gap-xs" disabled="">
+                            Unavailable
+                        </button>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- Footer (From JSON) -->
+<footer class="bg-surface-container-low border-t border-outline-variant w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-lg py-xl max-w-container-max mx-auto gap-md">
+<div class="text-body-md font-bold text-primary font-headline-sm">Canteenery</div>
+<div class="flex flex-wrap items-center justify-center gap-lg">
+<a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary underline decoration-secondary transition-colors duration-200" href="#">Support</a>
+<a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary underline decoration-secondary transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary underline decoration-secondary transition-colors duration-200" href="#">Terms of Service</a>
+<a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary underline decoration-secondary transition-colors duration-200" href="#">Contact Us</a>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">© 2024 Canteenery Smart Platforms. All rights reserved.</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Canteenery - Inventory Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#5c2400",
+                    "secondary-fixed": "#ffdbca",
+                    "primary-container": "#002147",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#aec7f6",
+                    "on-surface-variant": "#44474e",
+                    "outline-variant": "#c4c6cf",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#341100",
+                    "on-secondary-fixed": "#341100",
+                    "outline": "#74777f",
+                    "on-secondary-fixed-variant": "#783200",
+                    "on-surface": "#0d1c2d",
+                    "surface-bright": "#f8f9ff",
+                    "surface-variant": "#d4e4fa",
+                    "secondary-container": "#fd761a",
+                    "secondary-fixed-dim": "#ffb690",
+                    "on-primary-fixed-variant": "#2d476f",
+                    "tertiary-fixed": "#ffdbcb",
+                    "primary": "#000a1e",
+                    "surface-tint": "#465f88",
+                    "tertiary": "#180500",
+                    "surface": "#f8f9ff",
+                    "secondary": "#9d4300",
+                    "surface-container": "#e5efff",
+                    "inverse-primary": "#aec7f6",
+                    "on-primary-fixed": "#001b3d",
+                    "surface-container-high": "#dbe9ff",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#b97958",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#eef4ff",
+                    "on-error-container": "#93000a",
+                    "background": "#f8f9ff",
+                    "inverse-on-surface": "#e9f1ff",
+                    "on-primary-container": "#708ab5",
+                    "tertiary-fixed-dim": "#ffb691",
+                    "on-background": "#0d1c2d",
+                    "tertiary-container": "#3d1500",
+                    "primary-fixed": "#d6e3ff",
+                    "inverse-surface": "#233143",
+                    "surface-container-highest": "#d4e4fa",
+                    "on-tertiary-fixed-variant": "#6c391d",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#ccdbf2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "2xl": "48px",
+                    "sm": "8px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "lg": "24px",
+                    "container-max": "1280px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": [
+                            "Inter"
+                    ],
+                    "label-sm": [
+                            "Inter"
+                    ],
+                    "label-md": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "headline-md": [
+                            "Inter"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "body-sm": [
+                            "Inter"
+                    ],
+                    "headline-lg": [
+                            "Inter"
+                    ],
+                    "headline-sm": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-sm": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface font-body-md h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full w-[280px] bg-primary shadow-lg py-xl shrink-0 z-50">
+<!-- Header -->
+<div class="px-lg mb-xl">
+<h1 class="text-headline-sm font-headline-sm font-black text-on-primary mb-xs">Kitchen Staff</h1>
+<p class="text-label-sm font-label-sm text-primary-fixed-dim">Main Kitchen - Block A</p>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 overflow-y-auto">
+<a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard" data-weight="regular">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="queue" data-weight="regular">queue</span>
+<span class="text-label-md font-label-md">Live Queue</span>
+</a>
+<a class="flex items-center gap-md bg-transparent text-secondary-fixed border-l-4 border-secondary-container px-lg py-md opacity-100 scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="inventory_2" data-weight="fill">inventory_2</span>
+<span class="text-label-md font-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="reorder" data-weight="regular">reorder</span>
+<span class="text-label-md font-label-md">Bulk Orders</span>
+</a>
+<a class="flex items-center gap-md text-on-primary-container opacity-70 px-lg py-md hover:bg-primary-container hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="shopping_basket" data-weight="regular">shopping_basket</span>
+<span class="text-label-md font-label-md">Uncollected</span>
+</a>
+</div>
+<!-- CTA -->
+<div class="px-lg mt-auto pt-lg border-t border-primary-container">
+<button class="w-full flex items-center justify-center gap-sm bg-transparent border border-outline-variant text-secondary-fixed py-sm rounded-DEFAULT text-label-md font-label-md hover:bg-primary-container transition-colors">
+                Switch to Student View
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-[280px] h-full overflow-y-auto bg-background">
+<!-- TopNavBar (Mobile Only) -->
+<header class="flex md:hidden justify-between items-center w-full px-lg h-16 bg-surface-container-lowest border-b border-outline-variant shrink-0 z-40 sticky top-0">
+<h1 class="text-headline-md font-headline-md font-bold text-primary">Canteenery</h1>
+<div class="flex items-center gap-md">
+<button class="text-secondary"><span class="material-symbols-outlined" data-icon="menu">menu</span></button>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 p-md md:p-gutter max-w-container-max mx-auto w-full">
+<!-- Page Header -->
+<div class="mb-xl flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-primary mb-xs">Inventory</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Monitor availability and prevent orders for unavailable items.</p>
+</div>
+<div class="bg-surface-container-low px-md py-sm rounded-lg border border-outline-variant flex items-center gap-sm max-w-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="info">info</span>
+<p class="text-label-sm font-label-sm text-on-surface-variant leading-tight">Inventory-aware ordering prevents students from placing orders for unavailable food.</p>
+</div>
+</div>
+<!-- Bento Grid / Cards Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Card 1: VEG SANDWICH -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-md flex flex-col justify-between shadow-[0px_4px_12px_rgba(0,33,71,0.05)] relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-green-500"></div>
+<div class="flex justify-between items-start mb-lg pl-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">VEG SANDWICH</h3>
+<span class="bg-green-100 text-green-800 text-label-sm font-label-sm px-sm py-xs rounded-full border border-green-200">AVAILABLE</span>
+</div>
+<div class="pl-sm">
+<div class="flex items-baseline gap-xs mb-md">
+<span class="text-display-lg font-display-lg text-on-surface">23</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">remaining</span>
+</div>
+<button class="w-full bg-transparent border border-outline-variant text-primary py-sm rounded-DEFAULT text-label-md font-label-md hover:bg-surface-container transition-colors flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+                            Update Quantity
+                        </button>
+</div>
+</div>
+<!-- Card 2: COLD COFFEE -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-md flex flex-col justify-between shadow-[0px_4px_12px_rgba(0,33,71,0.05)] relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-amber-500"></div>
+<div class="flex justify-between items-start mb-lg pl-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">COLD COFFEE</h3>
+<span class="bg-amber-100 text-amber-800 text-label-sm font-label-sm px-sm py-xs rounded-full border border-amber-200">LOW STOCK</span>
+</div>
+<div class="pl-sm">
+<div class="flex items-baseline gap-xs mb-md">
+<span class="text-display-lg font-display-lg text-amber-600">4</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">remaining</span>
+</div>
+<button class="w-full bg-transparent border border-outline-variant text-primary py-sm rounded-DEFAULT text-label-md font-label-md hover:bg-surface-container transition-colors flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+                            Update Quantity
+                        </button>
+</div>
+</div>
+<!-- Card 3: MASALA DOSA -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-md flex flex-col justify-between shadow-[0px_4px_12px_rgba(0,33,71,0.05)] relative overflow-hidden group opacity-75">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-400"></div>
+<div class="flex justify-between items-start mb-lg pl-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface-variant line-through">MASALA DOSA</h3>
+<span class="bg-gray-100 text-gray-600 text-label-sm font-label-sm px-sm py-xs rounded-full border border-gray-200">SOLD OUT</span>
+</div>
+<div class="pl-sm">
+<div class="flex items-baseline gap-xs mb-md">
+<span class="text-display-lg font-display-lg text-gray-400">0</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">remaining</span>
+</div>
+<button class="w-full bg-transparent border border-outline-variant text-primary py-sm rounded-DEFAULT text-label-md font-label-md hover:bg-surface-container transition-colors flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                            Restock Item
+                        </button>
+</div>
+</div>
+<!-- Card 4: CHICKEN BIRYANI -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-md flex flex-col justify-between shadow-[0px_4px_12px_rgba(0,33,71,0.05)] relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-green-500"></div>
+<div class="flex justify-between items-start mb-lg pl-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">CHICKEN BIRYANI</h3>
+<span class="bg-green-100 text-green-800 text-label-sm font-label-sm px-sm py-xs rounded-full border border-green-200">AVAILABLE</span>
+</div>
+<div class="pl-sm">
+<div class="flex items-baseline gap-xs mb-md">
+<span class="text-display-lg font-display-lg text-on-surface">8</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">remaining</span>
+</div>
+<button class="w-full bg-transparent border border-outline-variant text-primary py-sm rounded-DEFAULT text-label-md font-label-md hover:bg-surface-container transition-colors flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+                            Update Quantity
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full mt-auto bg-surface-container-low border-t border-outline-variant flex flex-col md:flex-row justify-between items-center px-lg py-xl max-w-container-max mx-auto shrink-0">
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-sm md:mb-0">© 2024 Canteenery Smart Platforms. All rights reserved.</p>
+<div class="flex gap-md">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary underline decoration-secondary transition-colors duration-200" href="#">Support</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary underline decoration-secondary transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary underline decoration-secondary transition-colors duration-200" href="#">Terms of Service</a>
+</div>
+</footer>
+</main>
+</body></html>

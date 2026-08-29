@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Smart Queue Engine - Canteenery</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#5c2400",
+            "secondary-fixed": "#ffdbca",
+            "primary-container": "#002147",
+            "on-tertiary": "#ffffff",
+            "primary-fixed-dim": "#aec7f6",
+            "on-surface-variant": "#44474e",
+            "outline-variant": "#c4c6cf",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed": "#341100",
+            "on-secondary-fixed": "#341100",
+            "outline": "#74777f",
+            "on-secondary-fixed-variant": "#783200",
+            "on-surface": "#0d1c2d",
+            "surface-bright": "#f8f9ff",
+            "surface-variant": "#d4e4fa",
+            "secondary-container": "#fd761a",
+            "secondary-fixed-dim": "#ffb690",
+            "on-primary-fixed-variant": "#2d476f",
+            "tertiary-fixed": "#ffdbcb",
+            "primary": "#000a1e",
+            "surface-tint": "#465f88",
+            "tertiary": "#180500",
+            "surface": "#f8f9ff",
+            "secondary": "#9d4300",
+            "surface-container": "#e5efff",
+            "inverse-primary": "#aec7f6",
+            "on-primary-fixed": "#001b3d",
+            "surface-container-high": "#dbe9ff",
+            "on-secondary": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-tertiary-container": "#b97958",
+            "error": "#ba1a1a",
+            "surface-container-low": "#eef4ff",
+            "on-error-container": "#93000a",
+            "background": "#f8f9ff",
+            "inverse-on-surface": "#e9f1ff",
+            "on-primary-container": "#708ab5",
+            "tertiary-fixed-dim": "#ffb691",
+            "on-background": "#0d1c2d",
+            "tertiary-container": "#3d1500",
+            "primary-fixed": "#d6e3ff",
+            "inverse-surface": "#233143",
+            "surface-container-highest": "#d4e4fa",
+            "on-tertiary-fixed-variant": "#6c391d",
+            "on-primary": "#ffffff",
+            "surface-dim": "#ccdbf2"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "24px",
+            "2xl": "48px",
+            "sm": "8px",
+            "xl": "32px",
+            "xs": "4px",
+            "base": "8px",
+            "lg": "24px",
+            "container-max": "1280px",
+            "md": "16px"
+          },
+          "fontFamily": {
+            "display-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-sm": ["Inter"]
+          },
+          "fontSize": {
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #F8FAFC; color: #0d1c2d; }
+    .engine-glow { box-shadow: 0 0 40px rgba(0, 33, 71, 0.15); }
+    @keyframes pulse-flow { 0% { opacity: 0.4; transform: translateY(0); } 50% { opacity: 1; transform: translateY(5px); } 100% { opacity: 0.4; transform: translateY(0); } }
+    .flow-particle { animation: pulse-flow 2s infinite ease-in-out; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-on-background bg-background">
+  <!-- Top Navigation -->
+  <header class="bg-surface-container-lowest border-b border-outline-variant w-full h-16 flex items-center px-lg sticky top-0 z-50">
+    <div class="max-w-container-max mx-auto w-full flex items-center justify-between">
+      <div class="flex items-center gap-md">
+        <a href="index.html" class="flex items-center gap-sm">
+          <span class="material-symbols-outlined text-primary" data-icon="restaurant">restaurant</span>
+          <span class="font-headline-sm text-headline-sm font-bold text-primary">Canteenery</span>
+        </a>
+        <span class="text-xs bg-secondary-container text-white px-2 py-0.5 rounded font-bold uppercase">Smart Engine</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-lg">
+        <a href="index.html" class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">Home</a>
+        <a href="menu.html" class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">Menu</a>
+        <a href="checkout.html" class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">Checkout</a>
+        <a href="tracking.html" class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">My Orders</a>
+        <a href="kitchen.html" class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">skillet</span> Kitchen View
+        </a>
+      </nav>
+      <div class="flex items-center gap-sm">
+        <a href="checkout.html" class="bg-primary text-white font-label-md text-label-md px-md py-sm rounded-lg hover:opacity-90 transition-opacity">
+          Order Now
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Engine Canvas -->
+  <main class="flex-grow flex items-center justify-center py-xl px-lg">
+    <div class="max-w-container-max mx-auto w-full flex flex-col items-center">
+      
+      <!-- Header Section -->
+      <div class="text-center mb-xl max-w-3xl">
+        <h1 class="font-display-lg text-display-lg text-primary mb-xs">Smart Queue Engine</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">Pickup slots are calculated according to actual kitchen conditions.</p>
+        <p class="font-body-md text-body-md text-on-surface-variant mt-xs">Canteenery dynamically recommends pickup windows instead of sending every student to the same queue.</p>
+      </div>
+
+      <!-- Demo Scenario Presets -->
+      <div class="flex flex-wrap items-center justify-center gap-sm mb-lg max-w-4xl">
+        <span class="font-label-sm text-label-sm font-bold text-on-surface-variant uppercase mr-2">Demo Presets:</span>
+        <button onclick="applyPreset('low')" class="preset-btn px-sm py-1 rounded-md text-xs font-semibold bg-surface-container border border-outline-variant hover:bg-surface-variant transition-colors">
+          Scenario A: Low Load
+        </button>
+        <button onclick="applyPreset('moderate')" class="preset-btn px-sm py-1 rounded-md text-xs font-semibold bg-surface-container border border-outline-variant hover:bg-surface-variant transition-colors">
+          Scenario B: Moderate
+        </button>
+        <button onclick="applyPreset('high')" class="preset-btn px-sm py-1 rounded-md text-xs font-semibold bg-surface-container border border-outline-variant hover:bg-surface-variant transition-colors">
+          Scenario C: High Load
+        </button>
+        <button onclick="applyPreset('bulk')" class="preset-btn px-sm py-1 rounded-md text-xs font-semibold bg-surface-container border border-outline-variant hover:bg-surface-variant transition-colors">
+          Scenario D: Bulk Order
+        </button>
+        <button onclick="applyPreset('soldout')" class="preset-btn px-sm py-1 rounded-md text-xs font-semibold bg-surface-container border border-outline-variant hover:bg-surface-variant transition-colors">
+          Scenario E: Sold Out
+        </button>
+      </div>
+
+      <!-- Interactive Controls Bar -->
+      <div class="w-full max-w-5xl bg-surface-container-lowest rounded-xl border border-outline-variant p-md mb-md shadow-sm grid grid-cols-1 md:grid-cols-3 gap-md">
+        <div>
+          <label class="font-label-sm text-label-sm font-semibold text-on-surface-variant block mb-1">
+            Order Items: <span id="ctrl-items-label" class="text-primary font-bold">2 items (Veg Sandwich + Coffee)</span>
+          </label>
+          <select id="ctrl-items-select" onchange="handleControlChange()" class="w-full text-sm rounded-lg border-outline-variant bg-surface p-2">
+            <option value="standard">Standard: 2x Veg Sandwich, 1x Cold Coffee</option>
+            <option value="single">Single Quick Item: 1x Cold Coffee (3 min)</option>
+            <option value="heavy">Hot Meal: 1x Chicken Biryani, 2x Samosa (12 min)</option>
+            <option value="bulk">Bulk Order: 25x Sandwich, 20x Samosa (60 items)</option>
+            <option value="soldout">Sold Out Test: 1x Masala Dosa (0 Stock)</option>
+          </select>
+        </div>
+        <div>
+          <label class="font-label-sm text-label-sm font-semibold text-on-surface-variant block mb-1">
+            Kitchen Workload: <span id="ctrl-load-label" class="text-primary font-bold">62% (MODERATE)</span>
+          </label>
+          <input id="ctrl-load-slider" type="range" min="0" max="100" value="62" oninput="handleControlChange()" class="w-full accent-secondary-container cursor-pointer" />
+        </div>
+        <div>
+          <label class="font-label-sm text-label-sm font-semibold text-on-surface-variant block mb-1">
+            Orders Ahead in Queue: <span id="ctrl-ahead-label" class="text-primary font-bold">4 orders</span>
+          </label>
+          <input id="ctrl-ahead-slider" type="range" min="0" max="12" value="4" oninput="handleControlChange()" class="w-full accent-primary cursor-pointer" />
+        </div>
+      </div>
+
+      <!-- Visualization Canvas matching Stitch Layout -->
+      <div class="w-full max-w-5xl bg-surface-container-lowest rounded-xl shadow-[0px_4px_12px_rgba(0,33,71,0.05)] border border-outline-variant p-lg md:p-2xl relative overflow-hidden">
+        <!-- Background Subtle Grid -->
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#002147 1px, transparent 1px); background-size: 20px 20px;"></div>
+        
+        <div class="relative z-10 flex flex-col items-center gap-lg">
+          
+          <!-- Input Nodes Grid (5 Nodes) -->
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-md w-full mb-md relative">
+            
+            <!-- Data Node 1: Order Details -->
+            <div class="bg-surface-bright border border-outline-variant rounded-lg p-md flex items-center gap-sm shadow-sm relative z-10 hover:border-primary transition-colors">
+              <div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary-container shrink-0">
+                <span class="material-symbols-outlined text-xl" data-icon="receipt_long">receipt_long</span>
+              </div>
+              <div class="overflow-hidden">
+                <h3 class="font-label-md text-label-md text-on-surface font-semibold truncate">Order Details</h3>
+                <p id="node-order-size" class="font-label-sm text-label-sm text-on-surface-variant">Size: 3 items</p>
+              </div>
+            </div>
+
+            <!-- Data Node 2: Kitchen Workload -->
+            <div id="node-workload-card" class="bg-surface-bright border border-outline-variant rounded-lg p-md flex items-center gap-sm shadow-sm relative z-10 hover:border-primary transition-colors">
+              <div class="w-10 h-10 rounded-full bg-[#ffeedb] flex items-center justify-center text-secondary-container shrink-0">
+                <span class="material-symbols-outlined text-xl" data-icon="local_fire_department">local_fire_department</span>
+              </div>
+              <div class="overflow-hidden">
+                <h3 class="font-label-md text-label-md text-on-surface font-semibold truncate">Workload</h3>
+                <p id="node-workload-text" class="font-label-sm text-label-sm text-secondary font-bold">Load: 62%</p>
+              </div>
+            </div>
+
+            <!-- Data Node 3: Orders Ahead -->
+            <div class="bg-surface-bright border border-outline-variant rounded-lg p-md flex items-center gap-sm shadow-sm relative z-10 hover:border-primary transition-colors">
+              <div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary-container shrink-0">
+                <span class="material-symbols-outlined text-xl" data-icon="format_list_numbered">format_list_numbered</span>
+              </div>
+              <div class="overflow-hidden">
+                <h3 class="font-label-md text-label-md text-on-surface font-semibold truncate">Queue</h3>
+                <p id="node-queue-ahead" class="font-label-sm text-label-sm text-on-surface-variant">Ahead: 4</p>
+              </div>
+            </div>
+
+            <!-- Data Node 4: Prep Time -->
+            <div class="bg-surface-bright border border-outline-variant rounded-lg p-md flex items-center gap-sm shadow-sm relative z-10 hover:border-primary transition-colors">
+              <div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary-container shrink-0">
+                <span class="material-symbols-outlined text-xl" data-icon="timer">timer</span>
+              </div>
+              <div class="overflow-hidden">
+                <h3 class="font-label-md text-label-md text-on-surface font-semibold truncate">Prep Time</h3>
+                <p id="node-prep-time" class="font-label-sm text-label-sm text-on-surface-variant">Est: 11 min</p>
+              </div>
+            </div>
+
+            <!-- Data Node 5: Inventory -->
+            <div id="node-inventory-card" class="bg-surface-bright border border-outline-variant rounded-lg p-md flex items-center gap-sm shadow-sm relative z-10 hover:border-primary transition-colors col-span-2 md:col-span-1">
+              <div id="node-inventory-icon" class="w-10 h-10 rounded-full bg-[#dcfce7] flex items-center justify-center text-[#166534] shrink-0">
+                <span class="material-symbols-outlined text-xl" data-icon="inventory_2">inventory_2</span>
+              </div>
+              <div class="overflow-hidden">
+                <h3 class="font-label-md text-label-md text-on-surface font-semibold truncate">Inventory</h3>
+                <p id="node-inventory-text" class="font-label-sm text-label-sm text-green-700 font-bold">In Stock</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Flow Direction Arrow -->
+          <div class="flex flex-col items-center justify-center h-8 w-full relative z-10">
+            <span class="material-symbols-outlined text-outline flow-particle text-3xl" data-icon="arrow_downward">arrow_downward</span>
+          </div>
+
+          <!-- Core Engine Box -->
+          <div class="engine-glow bg-primary border-2 border-primary-fixed rounded-xl p-xl w-full max-w-lg text-center relative z-20 flex flex-col items-center">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-container to-primary rounded-xl opacity-50 pointer-events-none"></div>
+            <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-sm relative z-10" data-icon="memory">memory</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-primary relative z-10">SMART QUEUE ENGINE</h2>
+            <div class="flex items-center gap-xs mt-sm bg-inverse-surface rounded-full px-md py-xs relative z-10">
+              <span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+              <span class="font-label-sm text-label-sm text-on-primary">Processing realtime conditions...</span>
+            </div>
+            <!-- Formula Pill -->
+            <div class="mt-md text-xs text-primary-fixed-dim bg-white/10 px-md py-1 rounded-full relative z-10">
+              $$\text{Est. Prep} = \text{Base} + \text{Queue Delay} + \text{Load Adj} + \text{Bulk Adj}$$
+            </div>
+          </div>
+
+          <!-- Flow Direction Arrow -->
+          <div class="flex flex-col items-center justify-center h-8 w-full relative z-10">
+            <span class="material-symbols-outlined text-secondary-container flow-particle text-3xl" data-icon="arrow_downward">arrow_downward</span>
+          </div>
+
+          <!-- Output Box & Dynamic Reasoning -->
+          <div class="w-full max-w-xl flex flex-col gap-md">
+            <!-- Output Slot Card -->
+            <div class="bg-surface-container-low border-2 border-secondary-container rounded-xl p-lg text-center shadow-md relative z-10">
+              <h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs font-semibold">Recommended Pickup Slot</h3>
+              <div class="bg-surface-container-lowest rounded-lg py-md mt-sm border border-outline-variant flex items-center justify-center gap-sm shadow-inner">
+                <span class="material-symbols-outlined text-secondary text-2xl" data-icon="schedule">schedule</span>
+                <span id="output-recommended-slot" class="font-headline-lg text-headline-lg text-primary font-bold">12:45 – 1:00 PM</span>
+              </div>
+              <p id="output-ready-time" class="font-body-sm text-body-sm text-on-surface-variant mt-sm">Estimated Completion: ~12:52 PM</p>
+            </div>
+
+            <!-- Dynamic Reason Breakdown Box -->
+            <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-md shadow-sm">
+              <div class="flex items-center gap-1 font-label-md text-label-md font-bold text-primary mb-2">
+                <span class="material-symbols-outlined text-base text-secondary-container">bolt</span>
+                <span>Why this slot was scheduled:</span>
+              </div>
+              <ul id="output-explanation-list" class="space-y-1.5 text-sm text-on-surface-variant">
+                <!-- Dynamically populated -->
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mt-xl flex gap-md">
+        <button onclick="resetEngineSimulator()" class="bg-surface-container-lowest border border-outline-variant text-primary font-label-md text-label-md px-lg py-md rounded-lg shadow-sm hover:bg-surface-container transition-colors flex items-center gap-sm cursor-pointer">
+          <span class="material-symbols-outlined" data-icon="replay">replay</span> Reset Simulator
+        </button>
+        <a href="checkout.html" class="bg-secondary-container text-white font-label-md text-label-md px-lg py-md rounded-lg shadow-sm hover:bg-secondary transition-colors flex items-center gap-sm">
+          <span class="material-symbols-outlined">shopping_cart_checkout</span> Try in Checkout
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="mt-auto py-md text-center bg-surface-container-lowest border-t border-outline-variant">
+    <p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Canteenery Smart Platforms · Smart Queue Engine MVP</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/engine.js"></script>
+</body>
+</html>
